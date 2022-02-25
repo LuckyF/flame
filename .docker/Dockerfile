@@ -22,9 +22,13 @@ COPY --from=builder /app /app
 
 WORKDIR /app
 
+RUN apk add --no-cache shadow
+
 EXPOSE 5005
 
 ENV NODE_ENV=production
 ENV PASSWORD=flame_password
+ENV PUID=1000
+ENV PGID=1000
 
-CMD ["node", "server.js"]
+CMD ["/app/start.sh"]
